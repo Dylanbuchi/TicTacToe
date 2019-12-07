@@ -36,10 +36,18 @@ public class App {
 
             // check if there if it's already taken try again
             while (playerPositions.contains(userInput) || botPositions.contains(userInput)) {
+                System.out.print("This case is already selected please try again: ");
                 userInput = in.nextInt();
             }
+
             play(game, userInput, "player");
 
+            String result = winner();
+
+            if (result.length() > 0) {
+                System.out.println(winner());
+                break;
+            }
             // Bot turn
             Random n = new Random();
             int botNumber = n.nextInt(9) + 1;
@@ -48,11 +56,12 @@ public class App {
             while (playerPositions.contains(botNumber) || botPositions.contains(botNumber)) {
                 botNumber = n.nextInt(9) + 1;
             }
+
             play(game, botNumber, "bot");
 
             printGame(game);
 
-            String result = winner();
+            result = winner();
 
             if (result.length() > 0) {
                 System.out.println(winner());
